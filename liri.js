@@ -18,14 +18,12 @@ if (process.argv[2] != "do-what-it-says") {
     input = process.argv[2];
 }
 else{
-    console.log("True");
     fs.readFile("random.txt", "utf8", function(error, data) {
 
 
         var dataArr = data.split(",");
         input = dataArr[0];
 
-        console.log("test in " + input);
 
 
     });
@@ -107,18 +105,21 @@ else if (input==="movie-this"){
             var rottenTomatoes;
             // Parse the body of the site and recover just the imdbRating
             // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-            var ratings = body.Ratings;
-            console.log(ratings);
-            // for(var i=0; i < ratings.length - 1; i++){
+
+            //struggling to get my for loop working and cant figure out why
+
+            // var ratings = body.Ratings;
+            // console.log(ratings);
+            // for(var i=0; i < ratings.length; i++){
             //
-            //     if(ratings[i].Source ==="Rotten Tomatoes"){
-            //         rottenTomatoes = body.Ratings[i].Value
+            //     if(ratings[i].Source === "Rotten Tomatoes"){
+            //         rottenTomatoes = ratings[i].Value
             //     }
             // }
             console.log(JSON.parse(body).Title);
             console.log(JSON.parse(body).Year);
             console.log(JSON.parse(body).imdbRating);
-            console.log("RT" + rottenTomatoes);
+            // console.log("RT" + rottenTomatoes);
             console.log(JSON.parse(body).Country);
             console.log(JSON.parse(body).Language);
             console.log(JSON.parse(body).Plot);
