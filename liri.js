@@ -3,19 +3,35 @@ var request = require("request");
 var Spotify = require('node-spotify-api');
 const util = require("util");
 var twitter = require("twitter");
-
 var keys = require("./keys.js");
+var fs = require("fs")
 var twitterKeys = keys;
-
 var callTwitter = new twitter(twitterKeys);
-
 var spotify = new Spotify({
     id: "8d615a54ea5f4a6a94d87ff8327cf07d",
     secret: "0e9839847aa64f38b12e54a6f1b9dfc6"
 });
+var input;
 
-var input = process.argv[2];
+if (process.argv[2] != "do-what-it-says") {
 
+    input = process.argv[2];
+}
+else{
+    console.log("True");
+    fs.readFile("random.txt", "utf8", function(error, data) {
+
+
+        var dataArr = data.split(",");
+        input = dataArr[0];
+
+        console.log("test in " + input);
+
+
+    });
+}
+
+console.log("testout" + input);
 if(input === "my-tweets") {
 
 
@@ -113,9 +129,7 @@ else if (input==="movie-this"){
     });
 
 }
-else if (input === "do-what-it-says"){
 
-}
 else{
     console.log("I'm sorry I don't recognize that command. Please try again.")
 }
