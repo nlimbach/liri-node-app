@@ -5,7 +5,7 @@ const util = require("util");
 var twitter = require("twitter");
 
 var keys = require("./keys.js");
-var twitterKeys = keys.twitterKeys;
+var twitterKeys = keys;
 
 var callTwitter = new twitter(twitterKeys);
 
@@ -20,22 +20,24 @@ if(input === "my-tweets") {
 
 
 
-    var twitterParams = {
-        screen_name: "TestNicola54",
-        count: 5
+    var params = {
+        screen_name: "TestNicola54"
     };
-    callTwitter.get("statuses/user_timeline", twitterParams, recievedData);
 
-    function recievedData(error, response, data) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log(response);
+    callTwitter.get('statuses/user_timeline', params, function(error, tweets) {
 
+        if (!error) {
+
+            for(var i = 0; i < tweets.length; i++){
+                console.log(tweets[i].text);
+                 console.log(tweets[i].user.created_at);
+
+            }
         }
-    }
+    })
 
 }
+
 else if (input === "spotify-this-song"){
 
     var songName = "";
